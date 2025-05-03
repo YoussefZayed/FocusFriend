@@ -7,6 +7,8 @@ import cv2
 import json
 from pinecone import Pinecone
 
+
+
 # Pinecone init
 PINECONE_API_KEY   = os.getenv("PINECONE_API_KEY")
 PINECONE_ENV       = os.getenv("PINECONE_ENV")
