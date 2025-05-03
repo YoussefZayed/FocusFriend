@@ -75,6 +75,23 @@ function App(): React.JSX.Element {
           </div>
         </div>
       )}
+      
+      {/* To-Do List Section */}
+      <div className="todo-section">
+        <h2 className="todo-title">To-Do List</h2>
+        <ul className="todo-list">
+          <li className="todo-item">vibe code</li>
+          <li className="todo-item">win hackathon</li>
+        </ul>
+      </div>
+
+      {/* End Day Button */}
+      <div className="end-day-container">
+        <button className="end-day-button" onClick={() => window.customAPI.closeApp()}>
+          End Day
+        </button>
+      </div>
+
       {/* Remove other default elements if not needed */}
       {/*
       <img alt="logo" className="logo" src={electronLogo} />
