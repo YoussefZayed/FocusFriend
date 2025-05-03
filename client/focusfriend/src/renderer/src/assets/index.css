@@ -26,18 +26,24 @@ html {
   justify-content: center;
   align-items: center;
   background-color: transparent; /* Ensure app container is transparent */
+  padding: 5px;
+  box-sizing: border-box; /* Include padding in dimensions */
 }
 
 .animation-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  color: #fff; /* Example text color - change as needed */
-  /* Add styles for your animation placeholders */
-  /* For testing, add a semi-transparent background */
-  /* background-color: rgba(255, 255, 255, 0.1); */
-  padding: 10px;
+  padding: 0;
   border-radius: 8px;
+  width: 100%;
+  height: 100%;
 }
 
+/* Remove h2 specific styles */
+/*
 .animation-placeholder.idle h2 {
   color: lightgreen;
 }
@@ -45,7 +51,37 @@ html {
 .animation-placeholder.sad h2 {
   color: lightcoral;
 }
+*/
 
+/* Renamed from .dog-animation */
+.status-animation {
+  max-width: 80%; /* Adjust size as needed, leave space for text */
+  max-height: 70%; /* Adjust size as needed */
+  object-fit: contain;
+  margin-bottom: 5px; /* Space between image and text */
+}
+
+/* Styles for the status text */
+.status-text {
+  font-family: Arial, sans-serif; /* Choose a suitable font */
+  font-weight: bold;
+  font-size: 1.5em; /* Adjust size as needed */
+  margin: 0;
+  padding: 0;
+  /* Add text shadow for visibility against transparent background */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.focused-text {
+  color: #76ff03; /* Bright green for focused */
+}
+
+.unfocused-text {
+  color: #ff5252; /* Bright red for not focused */
+}
+
+/* Remove old SVG styles if they exist */
+/* ... */
 
 /* Keep existing styles below or integrate them */
 /* ... existing code ... */ 
