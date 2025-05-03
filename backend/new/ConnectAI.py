@@ -38,7 +38,7 @@ def analyze_and_assess(img1_path: str, img2_path: str) -> dict:
     b64_2 = encode_image(img2_path)
 
     resp = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4o-mini",
         response_format={"type": "json_object"},
         messages=[
             {
