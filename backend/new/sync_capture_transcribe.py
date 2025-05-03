@@ -6,6 +6,27 @@ import pyautogui
 import cv2
 from ConnectAI import analyze_and_assess
 import json
+from pinecone import Pinecone
+
+# Pinecone init
+PINECONE_API_KEY   = os.getenv("PINECONE_API_KEY")
+PINECONE_ENV       = os.getenv("PINECONE_ENV")
+INDEX_NAME         = os.getenv("PINECONE_INDEX_NAME", "focus-analysis")
+if not (PINECONE_API_KEY and PINECONE_ENV):
+    raise ValueError("Please set PINECONE_API_KEY and PINECONE_ENV in your .env")
+
+pc = Pinecone(api_key=PINECONE_API_KEY)
+
+# Create index if needed (1536 dims for text-embedding-ada-002)
+if INDEX_NAME not in pc.list_indexes().names():
+    pc.create_index(
+        name=INDEX_NAME,
+        dimension=1536,
+        metric="cosine"
+    )
+
+index = pc.Index(INDEX_NAME)
+    
 
 # Directory paths
 screenshot_dir = "../device_screenshots"
