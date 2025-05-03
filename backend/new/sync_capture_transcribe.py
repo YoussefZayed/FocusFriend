@@ -1,11 +1,43 @@
+#!/usr/bin/env python3
 import threading
 import time
 import os
 from datetime import datetime, timezone
 import pyautogui
 import cv2
+import openai
+from pinecone import Pinecone
+from dotenv import load_dotenv
 from ConnectAI import analyze_and_assess
 import json
+
+# Load environment variables from .env
+load_dotenv()
+
+# OpenAI key
+openai.api_key = os.getenv("OPENAI_API_KEY")
+if not openai.api_key:
+    raise ValueError("Please set OPENAI_API_KEY in your .env")
+
+# Pinecone init
+PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+PINECONE_ENV = os.getenv("PINECONE_ENV")
+INDEX_NAME = os.getenv("PINECONE_INDEX_NAME", "focus-analysis")
+
+if not (PINECONE_API_KEY and PINECONE_ENV):
+    raise ValueError("Please set PINECONE_API_KEY and PINECONE_ENV in your .env")
+
+pc = Pinecone(api_key=PINECONE_API_KEY)
+
+# Create index if needed (1536 dims for ada-002 embeddings)
+if INDEX_NAME not in pc.list_indexes().names():
+    pc.create_index(
+        name=INDEX_NAME,
+        dimension=1536,
+        metric="cosine"
+    )
+
+index = pc.Index(INDEX_NAME)
 
 # Directory paths
 screenshot_dir = "../device_screenshots"
@@ -16,7 +48,6 @@ LOG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "focus_log.j
 os.makedirs(os.path.join(os.path.dirname(__file__), screenshot_dir), exist_ok=True)
 os.makedirs(os.path.join(os.path.dirname(__file__), camera_capture_dir), exist_ok=True)
 
-# Function to capture a screenshot
 
 def capture_screenshot():
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -26,12 +57,11 @@ def capture_screenshot():
     print(f"Screenshot saved as {screenshot_filename}")
     return screenshot_filename
 
-# Function to capture an image from the camera
 
 def capture_camera_image():
     cap = cv2.VideoCapture(0)
     if not cap.isOpened():
-        print("Cannot open the main camera.")
+        print("Cannot open camera.")
         return None
     ret, frame = cap.read()
     cap.release()
@@ -44,13 +74,15 @@ def capture_camera_image():
     print(f"Camera capture saved as {image_filename}")
     return image_filename
 
-# Transcribe function
 
-def transcribe(screenshot_path, camera_image_path):
-    # Placeholder for the transcribe function
-    result = analyze_and_assess(camera_image_path, screenshot_path)
-    print(f"Transcribing {screenshot_path} and {camera_image_path}")
-    return result
+def store_in_pinecone(result: dict, id: str):
+    """
+    result: { "analysis": {"activities": ...}, "state": "focused"|"distracted" }
+    id: unique string for this record (e.g. timestamp or filename)
+    """
+    activities = result["analysis"].get("activities", "")
+    state = result.get("state", "")
+    text = f"{activities}. State: {state}"
 
 # Synchronize captures and transcription every 5 seconds
 try:
