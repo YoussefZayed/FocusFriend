@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Simple representation of a sad dog face -->
+  <circle cx="50" cy="50" r="40" fill="#dcdcdc" stroke="#000" stroke-width="2"/> <!-- Head (greyer color) -->
+  <circle cx="35" cy="45" r="5" fill="#000"/> <!-- Left eye (slightly lower) -->
+  <circle cx="65" cy="45" r="5" fill="#000"/> <!-- Right eye (slightly lower) -->
+  <ellipse cx="50" cy="60" rx="10" ry="5" fill="#000"/> <!-- Nose -->
+  <!-- Simple frown -->
+  <path d="M 35 75 Q 50 65 65 75" stroke="#000" stroke-width="2" fill="none"/> 
+  <!-- Droopier Ears -->
+  <path d="M 20 40 Q 30 50 40 40 Z" fill="#8b4513"/> <!-- Lowered ear -->
+  <path d="M 80 40 Q 70 50 60 40 Z" fill="#8b4513"/> <!-- Lowered ear -->
+</svg> 

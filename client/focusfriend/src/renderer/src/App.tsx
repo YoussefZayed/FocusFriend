@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import Versions from './components/Versions'
-import electronLogo from './assets/electron.svg'
+// import Versions from './components/Versions'
+// import electronLogo from './assets/electron.svg'
+
+// Reference GIFs from the public directory using absolute paths
+const focusedAstronautGif = 'https://github.com/YoussefZayed/FocusFriend/blob/main/client/focusfriend/public/focused.gif?raw=true'
+const unfocusedAstronautGif = 'https://github.com/YoussefZayed/FocusFriend/blob/main/client/focusfriend/public/not-focused.gif?raw=true'
 
 // Mock API function (replace with actual API call later)
 let isFocused = true // Start with focused state
@@ -14,18 +18,17 @@ const fetchFocusStatus = async (): Promise<{ focused: boolean }> => {
 }
 
 function App(): React.JSX.Element {
-  const [dogState, setDogState] = useState<'idle' | 'sad'>('idle')
+  const [focusState, setFocusState] = useState<'focused' | 'unfocused'>('focused')
 
   useEffect(() => {
     // Function to check status and update state
     const checkStatus = async () => {
       try {
         const status = await fetchFocusStatus()
-        setDogState(status.focused ? 'idle' : 'sad')
+        setFocusState(status.focused ? 'focused' : 'unfocused')
       } catch (error) {
         console.error('Error fetching focus status:', error)
-        // Optionally set a default or error state
-        setDogState('idle') // Default to idle on error
+        setFocusState('focused')
       }
     }
 
@@ -37,24 +40,27 @@ function App(): React.JSX.Element {
 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId)
-  }, []) // Empty dependency array ensures this runs only once on mount
+  }, [])
 
-  const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
+  // Remove unused ipcHandle if not needed
+  // const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
 
   return (
     <div className="app-container">
-      {/* Display different content based on state */}
-      {dogState === 'idle' ? (
-        <div className="animation-placeholder idle">
-          <h2>Idle Dog Animation</h2>
-          {/* Replace with actual idle animation component/element */}
+      {/* Display different content based on focus state */}
+      {focusState === 'focused' ? (
+        <div className="animation-placeholder focused">
+          <img src={focusedAstronautGif} alt="Focused Astronaut" className="status-animation" />
+          <h1 className="status-text focused-text">FOCUSED</h1>
         </div>
       ) : (
-        <div className="animation-placeholder sad">
-          <h2>Sad Dog Animation</h2>
-          {/* Replace with actual sad animation component/element */}
+        <div className="animation-placeholder unfocused">
+          <img src={unfocusedAstronautGif} alt="Unfocused Astronaut" className="status-animation" />
+          <h1 className="status-text unfocused-text">NOT FOCUSED</h1>
         </div>
       )}
+      {/* Remove other default elements if not needed */}
+      {/*
       <img alt="logo" className="logo" src={electronLogo} />
       <div className="creator">Powered by electron-vite</div>
       <div className="text">
@@ -77,6 +83,7 @@ function App(): React.JSX.Element {
         </div>
       </div>
       <Versions></Versions>
+      */}
     </div>
   )
 }
