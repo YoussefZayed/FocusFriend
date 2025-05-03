@@ -2,13 +2,14 @@
 import threading
 import time
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 import pyautogui
 import cv2
 import openai
 from pinecone import Pinecone
 from dotenv import load_dotenv
 from ConnectAI import analyze_and_assess
+import json
 
 # Load environment variables from .env
 load_dotenv()
@@ -39,18 +40,22 @@ if INDEX_NAME not in pc.list_indexes().names():
 index = pc.Index(INDEX_NAME)
 
 # Directory paths
-screenshot_dir = "device_screenshots"
-camera_capture_dir = "camera_captures"
-os.makedirs(screenshot_dir, exist_ok=True)
-os.makedirs(camera_capture_dir, exist_ok=True)
+screenshot_dir = "../device_screenshots"
+camera_capture_dir = "../camera_captures"
+LOG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "focus_log.json")
+
+# Ensure directories exist
+os.makedirs(os.path.join(os.path.dirname(__file__), screenshot_dir), exist_ok=True)
+os.makedirs(os.path.join(os.path.dirname(__file__), camera_capture_dir), exist_ok=True)
 
 
 def capture_screenshot():
-    ts = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    fn = os.path.join(screenshot_dir, f"device_screenshot_{ts}.png")
-    pyautogui.screenshot().save(fn)
-    print(f"Screenshot saved as {fn}")
-    return fn
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    screenshot_filename = os.path.join(os.path.dirname(__file__), screenshot_dir, f"device_screenshot_{timestamp}.png")
+    screenshot = pyautogui.screenshot()
+    screenshot.save(screenshot_filename)
+    print(f"Screenshot saved as {screenshot_filename}")
+    return screenshot_filename
 
 
 def capture_camera_image():
@@ -63,11 +68,11 @@ def capture_camera_image():
     if not ret:
         print("Failed to capture image")
         return None
-    ts = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    fn = os.path.join(camera_capture_dir, f"camera_capture_{ts}.png")
-    cv2.imwrite(fn, frame)
-    print(f"Camera capture saved as {fn}")
-    return fn
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    image_filename = os.path.join(os.path.dirname(__file__), camera_capture_dir, f"camera_capture_{timestamp}.png")
+    cv2.imwrite(image_filename, frame)
+    print(f"Camera capture saved as {image_filename}")
+    return image_filename
 
 
 def store_in_pinecone(result: dict, id: str):
@@ -79,42 +84,52 @@ def store_in_pinecone(result: dict, id: str):
     state = result.get("state", "")
     text = f"{activities}. State: {state}"
 
-    # 1) Create embedding
-    emb_resp = openai.embeddings.create(
-        model="text-embedding-ada-002",
-        input=text
-    )
-    vector = emb_resp.data[0].embedding
+# Synchronize captures and transcription every 5 seconds
+try:
+    while True:
+        screenshot_path = capture_screenshot()
+        camera_image_path = capture_camera_image()
+        if screenshot_path and camera_image_path:
+            result = transcribe(screenshot_path, camera_image_path)
+            print(f"Transcription result: {result}")
 
-    # 2) Upsert to Pinecone
-    metadata = {
-        "activities": activities,
-        "state": state,
-        "timestamp": datetime.utcnow().isoformat() + "Z"
-    }
-    index.upsert([(id, vector, metadata)])
-    print(f"Upserted vector to Pinecone with id={id}")
+            # Add timestamp to the result
+            timestamp = datetime.now(timezone.utc).isoformat()
+            log_entry = {
+                "timestamp": timestamp,
+                "analysis": result.get("analysis", {}),
+                "state": result.get("state")
+            }
 
+            # Read existing log data, append new result, and write back
+            log_data = []
+            if os.path.exists(LOG_FILE):
+                try:
+                    with open(LOG_FILE, "r") as f:
+                        content = f.read()
+                        if content: # Check if file is not empty
+                           log_data = json.loads(content)
+                    if not isinstance(log_data, list): # Ensure it's a list
+                        print(f"Warning: {LOG_FILE} does not contain a list. Starting new log.")
+                        log_data = []
+                except json.JSONDecodeError:
+                    print(f"Warning: Could not decode JSON from {LOG_FILE}. Starting new log.")
+                    log_data = []
+                except Exception as e:
+                     print(f"Warning: Could not read {LOG_FILE}: {e}. Starting new log.")
+                     log_data = []
 
-def transcribe_and_store(screen_path, camera_path):
-    # 1) Call your two-step analysis
-    result = analyze_and_assess(screen_path, camera_path)
-    print(f"Analysis result: {result}")
+            log_data.append(log_entry)
 
-    # 2) Build an ID (here, use the screen filename minus extension)
-    rec_id = os.path.splitext(os.path.basename(screen_path))[0]
+            # Write updated log data back to the file
+            print(f"Attempting to write to log file: {LOG_FILE}")
+            try:
+                with open(LOG_FILE, "w") as f:
+                    json.dump(log_data, f, indent=2)
+                print(f"Successfully wrote {len(log_data)} entries to {LOG_FILE}")
+            except Exception as e:
+                print(f"Error writing to log file {LOG_FILE}: {e}")
 
-    # 3) Store in Pinecone
-    store_in_pinecone(result, rec_id)
-
-
-if __name__ == "__main__":
-    try:
-        while True:
-            screen = capture_screenshot()
-            cam = capture_camera_image()
-            if screen and cam:
-                transcribe_and_store(screen, cam)
-            time.sleep(5)
-    except KeyboardInterrupt:
-        print("Stopping capture loop.")
+        time.sleep(5)
+except KeyboardInterrupt:
+    print("Process stopped.") 

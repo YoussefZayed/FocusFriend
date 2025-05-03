@@ -17,3 +17,7 @@
 
 backend/face_captures
 backend/screenshots
+*/camera_captures
+*/device_screenshots
+backend/new/camera_captures
+backend/device_screenshots
