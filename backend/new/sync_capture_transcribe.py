@@ -171,7 +171,6 @@ try:
         # except Exception as pinecone_error:
         #     print(f"Error embedding or upserting to Pinecone: {pinecone_error}")
 
-        time.sleep(2)
 
 except KeyboardInterrupt:
     print("Process stopped.")
