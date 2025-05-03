@@ -15,4 +15,5 @@
 .env.test
 .env.test.local
 
-
+backend/face_captures
+backend/screenshots
