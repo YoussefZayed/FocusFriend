@@ -75,5 +75,12 @@
       "activities": "Taking a group photo and working with code on a computer."
     },
     "state": "distracted"
+  },
+  {
+    "timestamp": "2025-05-03T20:03:04.533747+00:00",
+    "analysis": {
+      "activities": "Working on programming and coding tasks in an office environment."
+    },
+    "state": "focused"
   }
 ]
