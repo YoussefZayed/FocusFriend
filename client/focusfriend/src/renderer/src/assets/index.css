@@ -7,6 +7,7 @@ html,
   width: 100%;
   height: 100%;
   overflow: hidden; /* Prevent scrollbars */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Make background transparent */
@@ -23,11 +24,52 @@ html {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column; /* Changed to column for title bar + content layout */
+  background-color: rgba(20, 20, 40, 0.85); /* Semi-transparent background */
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  overflow: hidden; /* Ensure content stays within border radius */
+  box-sizing: border-box;
+}
+
+/* New title bar styles */
+.title-bar {
+  width: 100%;
+  background-color: rgba(30, 30, 60, 0.9);
+  color: white;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  background-color: transparent; /* Ensure app container is transparent */
-  padding: 5px;
-  box-sizing: border-box; /* Include padding in dimensions */
+  padding: 8px 12px;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.title-text {
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.title-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.title-control-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.close-button {
+  background-color: #ff5f57;
+}
+
+.minimize-button {
+  background-color: #ffbd2e;
 }
 
 .animation-placeholder {
@@ -36,40 +78,41 @@ html {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 0;
-  border-radius: 8px;
+  flex: 1; /* Take remaining space */
   width: 100%;
-  height: 100%;
+  padding: 15px 10px;
+  box-sizing: border-box;
 }
 
-/* Remove h2 specific styles */
-/*
-.animation-placeholder.idle h2 {
-  color: lightgreen;
-}
-
-.animation-placeholder.sad h2 {
-  color: lightcoral;
-}
-*/
-
-/* Renamed from .dog-animation */
+/* Status animation */
 .status-animation {
-  max-width: 80%; /* Adjust size as needed, leave space for text */
-  max-height: 70%; /* Adjust size as needed */
+  width: 120px; /* Fixed width */
+  height: 120px; /* Fixed height */
   object-fit: contain;
-  margin-bottom: 5px; /* Space between image and text */
+  margin-bottom: 10px;
+}
+
+/* Fixed height container for text to prevent layout shifts */
+.status-text-container {
+  height: 30px; /* Fixed height to prevent layout shifts */
+  width: 200px; /* Fixed width for the text container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Styles for the status text */
 .status-text {
-  font-family: Arial, sans-serif; /* Choose a suitable font */
   font-weight: bold;
-  font-size: 1.5em; /* Adjust size as needed */
+  font-size: 1.4em;
   margin: 0;
   padding: 0;
-  /* Add text shadow for visibility against transparent background */
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+  min-width: 150px; /* Minimum width to prevent shrinking */
+  text-align: center; /* Center the text horizontally */
+  /* Text shadow for better visibility */
+  text-shadow:
+    1px 1px 2px rgba(0, 0, 0, 0.8),
+    1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 .focused-text {
@@ -78,6 +121,40 @@ html {
 
 .unfocused-text {
   color: #ff5252; /* Bright red for not focused */
+}
+
+/* Animation for the dog/astronaut */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.status-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Add a gentle pulsing effect for unfocused state */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.unfocused .status-animation {
+  animation: float 3s ease-in-out infinite, pulse 2s ease-in-out infinite;
 }
 
 /* Remove old SVG styles if they exist */

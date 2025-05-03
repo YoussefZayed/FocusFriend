@@ -8,8 +8,8 @@ function createWindow(): void {
   const primaryDisplay = screen.getPrimaryDisplay()
   const { width: screenWidth, height: screenHeight } = primaryDisplay.workAreaSize
 
-  const windowWidth = 200 // Example width, adjust as needed
-  const windowHeight = 200 // Example height, adjust as needed
+  const windowWidth = 300 // Wider rectangle
+  const windowHeight = 400 // Less height for a rectangle
   const xPos = screenWidth - windowWidth - 20 // Position from right edge (with some padding)
   const yPos = 20 // Position from top edge (with some padding)
 
@@ -24,6 +24,7 @@ function createWindow(): void {
     frame: false, // Make the window frameless
     transparent: true, // Make the window background transparent
     resizable: false, // Prevent resizing
+    skipTaskbar: true, // Hide from taskbar
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
@@ -65,6 +66,17 @@ app.whenReady().then(() => {
 
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
+
+  // Add handlers for window controls
+  ipcMain.on('minimize', () => {
+    const win = BrowserWindow.getFocusedWindow()
+    if (win) win.minimize()
+  })
+
+  ipcMain.on('close', () => {
+    const win = BrowserWindow.getFocusedWindow()
+    if (win) win.close()
+  })
 
   createWindow()
 

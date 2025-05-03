@@ -7,12 +7,12 @@ const focusedAstronautGif = 'https://github.com/YoussefZayed/FocusFriend/blob/ma
 const unfocusedAstronautGif = 'https://github.com/YoussefZayed/FocusFriend/blob/main/client/focusfriend/public/not-focused.gif?raw=true'
 
 // Mock API function (replace with actual API call later)
-let isFocused = true // Start with focused state
+// let isFocused = true // Remove the global toggle variable
 const fetchFocusStatus = async (): Promise<{ focused: boolean }> => {
   // Simulate API call delay
   await new Promise((resolve) => setTimeout(resolve, 100))
-  // Toggle the status for demonstration
-  isFocused = !isFocused
+  // Randomly determine focus status
+  const isFocused = Math.random() > 0.5 // ~70% chance of being focused
   console.log('Mock API: User focused =', isFocused)
   return { focused: isFocused }
 }
@@ -47,16 +47,29 @@ function App(): React.JSX.Element {
 
   return (
     <div className="app-container">
+      {/* Title Bar */}
+      <div className="title-bar">
+        <div className="title-text">Focus Friend</div>
+        <div className="title-controls">
+          <button className="title-control-button minimize-button" onClick={() => window.electron.ipcRenderer.send('minimize')}></button>
+          <button className="title-control-button close-button" onClick={() => window.electron.ipcRenderer.send('close')}></button>
+        </div>
+      </div>
+
       {/* Display different content based on focus state */}
       {focusState === 'focused' ? (
         <div className="animation-placeholder focused">
           <img src={focusedAstronautGif} alt="Focused Astronaut" className="status-animation" />
-          <h1 className="status-text focused-text">FOCUSED</h1>
+          <div className="status-text-container">
+            <h1 className="status-text focused-text">FOCUSED</h1>
+          </div>
         </div>
       ) : (
         <div className="animation-placeholder unfocused">
           <img src={unfocusedAstronautGif} alt="Unfocused Astronaut" className="status-animation" />
-          <h1 className="status-text unfocused-text">NOT FOCUSED</h1>
+          <div className="status-text-container">
+            <h1 className="status-text unfocused-text">NOT FOCUSED</h1>
+          </div>
         </div>
       )}
       {/* Remove other default elements if not needed */}
