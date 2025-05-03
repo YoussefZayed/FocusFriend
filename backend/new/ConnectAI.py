@@ -44,14 +44,14 @@ def analyze_and_assess(img1_path: str, img2_path: str) -> dict:
             print(f"Attempting OpenAI call with key #{attempt + 1}")
             client = OpenAI(api_key=key)
             resp = client.chat.completions.create(
-                model="gpt-4o-mini", # Consider keeping mini for speed/cost
+                model="gpt-4o", # Consider keeping mini for speed/cost
                 response_format={"type": "json_object"},
                 messages=[
                     {
                         "role": "system", # Updated system prompt below
                         "content": (
                             "Analyze the two attached images. Reply with exactly one JSON object containing two keys: 'activities' and 'state'. NO SUB OBJECTS!!! "
-                            "For 'activities', describe in detail what the user is doing, looking at, their posture, and specific content/apps on screen. If they are looking forward, assume they are looking at the screen. Note if multiple people are present. "
+                            "For 'activities', describe in detail what the user is doing, looking at, and specific content/apps on screen. If they are looking forward, assume they are looking at the screen. Note if multiple people are present. "
                             "Ignore the astronaut figure. Base description only on camera and screen content. "
                             "For 'state', value must be 'focused' or 'distracted'. User is 'focused' if looking at screen AND screen shows relevant work/study (e.g., code, docs, relevant website, task from todo list). "
                             "User is 'distracted' if looking away, on phone, social media, games, unrelated sites (e.g., Reddit).  WRITE VERY LITTLE ABOUT THE SELFIE IMAGE AND MORE ABOUT THE SCREEN IMAGE. "
