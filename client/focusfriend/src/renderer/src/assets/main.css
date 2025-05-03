@@ -169,3 +169,74 @@ code {
     display: none;
   }
 }
+
+/* === To-Do List Styles === */
+
+.todo-section {
+  margin-top: 1.5rem; /* Adjusted top margin */
+  padding: 1rem;
+  margin-bottom: 1.5rem; /* Add space below the todo list */
+}
+
+.todo-title {
+  font-size: 1.25rem; /* Slightly smaller than main status */
+  font-weight: 600;
+  color: #cccccc; /* Lighter grey color */
+  margin-bottom: 0.75rem; /* Space below the title */
+  text-align: center;
+}
+
+.todo-list {
+  list-style: none; /* Remove default bullet points */
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.todo-item {
+  color: #aaaaaa; /* Medium grey color */
+  font-size: 1rem;
+  padding: 0.3rem 0; /* Add vertical spacing between items */
+}
+
+/* === End Day Button Styles === */
+
+.end-day-container {
+  margin-top: 1.5rem; /* Adjusted top margin */
+  text-align: center;
+  padding-bottom: 1rem; /* Add padding at the very bottom */
+}
+
+.end-day-button {
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  border: 1px solid var(--ev-button-alt-border);
+  color: var(--ev-button-alt-text);
+  background-color: var(--ev-button-alt-bg);
+  text-align: center;
+  font-weight: 600;
+  white-space: nowrap;
+  border-radius: 20px;
+  padding: 0.5rem 1.5rem; /* Padding inside the button */
+  line-height: normal;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.end-day-button:hover {
+  border-color: var(--ev-button-alt-hover-border);
+  color: var(--ev-button-alt-hover-text);
+  background-color: var(--ev-button-alt-hover-bg);
+  transform: scale(1.05); /* Slight scale effect on hover */
+}
+
+.animation-placeholder {
+  /* Add some space below the GIF/status area */
+  margin-bottom: 1.5rem; 
+}
+
+.status-text-container {
+   /* Add space below the FOCUSED/NOT FOCUSED text */
+  margin-bottom: 1.5rem; 
+}
