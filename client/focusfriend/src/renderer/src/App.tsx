@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react'
 // import electronLogo from './assets/electron.svg'
 
 // Reference GIFs from the public directory using absolute paths
-const focusedAstronautGif = '/focused.gif'
-const unfocusedAstronautGif = '/not-focused.gif'
+const focusedAstronautGif = 'https://github.com/YoussefZayed/FocusFriend/blob/main/client/focusfriend/public/focused.gif?raw=true'
+const unfocusedAstronautGif = 'https://github.com/YoussefZayed/FocusFriend/blob/main/client/focusfriend/public/not-focused.gif?raw=true'
 
 // Mock API function (replace with actual API call later)
 let isFocused = true // Start with focused state
