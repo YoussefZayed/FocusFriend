@@ -24,7 +24,12 @@ A cute productivity companion that helps you stay focused during work sessions.
 npm install
 
 # Start the app in development mode
+# DevTools will open in a separate window
 npm run dev
+
+# Start development server without launching Electron
+# This is useful for debugging and development
+npm run dev:console-only
 ```
 
 ### Build

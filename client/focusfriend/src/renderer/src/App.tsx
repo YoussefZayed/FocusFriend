@@ -7,14 +7,20 @@ const focusedAstronautGif = 'https://github.com/YoussefZayed/FocusFriend/blob/ma
 const unfocusedAstronautGif = 'https://github.com/YoussefZayed/FocusFriend/blob/main/client/focusfriend/public/not-focused.gif?raw=true'
 
 // Mock API function (replace with actual API call later)
-// let isFocused = true // Remove the global toggle variable
 const fetchFocusStatus = async (): Promise<{ focused: boolean }> => {
-  // Simulate API call delay
-  await new Promise((resolve) => setTimeout(resolve, 100))
-  // Randomly determine focus status
-  const isFocused = Math.random() > 0.5 // ~70% chance of being focused
-  console.log('Mock API: User focused =', isFocused)
-  return { focused: isFocused }
+  try {
+    const response = await fetch('http://127.0.0.1:5000/is-focused');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data; // Assuming the API returns { focused: boolean }
+  } catch (error) {
+    console.error("Could not fetch focus status:", error);
+    // Return a default or fallback value in case of an error
+    // For now, let's default to focused to avoid breaking the UI logic completely
+    return { focused: true }; 
+  }
 }
 
 function App(): React.JSX.Element {
@@ -50,10 +56,7 @@ function App(): React.JSX.Element {
       {/* Title Bar */}
       <div className="title-bar">
         <div className="title-text">Focus Friend</div>
-        <div className="title-controls">
-          <button className="title-control-button minimize-button" onClick={() => window.electron.ipcRenderer.send('minimize')}></button>
-          <button className="title-control-button close-button" onClick={() => window.electron.ipcRenderer.send('close')}></button>
-        </div>
+     
       </div>
 
       {/* Display different content based on focus state */}

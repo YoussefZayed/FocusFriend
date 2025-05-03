@@ -1,4 +1,4 @@
-import { app, shell, BrowserWindow, ipcMain, screen } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, screen, session } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
@@ -6,7 +6,7 @@ import icon from '../../resources/icon.png?asset'
 function createWindow(): void {
   // Create the browser window.
   const primaryDisplay = screen.getPrimaryDisplay()
-  const { width: screenWidth, height: screenHeight } = primaryDisplay.workAreaSize
+  const { width: screenWidth } = primaryDisplay.workAreaSize
 
   const windowWidth = 300 // Wider rectangle
   const windowHeight = 400 // Less height for a rectangle
@@ -31,6 +31,19 @@ function createWindow(): void {
       sandbox: false
     }
   })
+
+  // Add the CSP handler back
+  session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+      responseHeaders: {
+        ...details.responseHeaders,
+        'Content-Security-Policy': ["default-src 'self' 'unsafe-inline' data:; connect-src 'self' http://127.0.0.1:5000 http://localhost:* ws://localhost:*; img-src 'self' https://github.com https://raw.githubusercontent.com data:"]
+      }
+    })
+  })
+
+  // Open DevTools on startup
+  mainWindow.webContents.openDevTools({ mode: 'detach' })
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
