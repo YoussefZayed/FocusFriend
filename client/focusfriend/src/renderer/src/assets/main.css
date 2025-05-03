@@ -1,5 +1,11 @@
 @import './base.css';
 
+html, body, #root {
+  height: 100%; /* Ensure parent elements take full height */
+  margin: 0;
+  padding: 0;
+}
+
 body {
   display: flex;
   align-items: center;
@@ -8,6 +14,7 @@ body {
   background-image: url('./wavy-lines.svg');
   background-size: cover;
   user-select: none;
+  margin: 0;
 }
 
 code {
@@ -173,16 +180,18 @@ code {
 /* === To-Do List Styles === */
 
 .todo-section {
-  margin-top: 1.5rem; /* Adjusted top margin */
-  padding: 1rem;
-  margin-bottom: 1.5rem; /* Add space below the todo list */
+  /* margin-top: 0.5rem; */ /* Removed top margin */
+  width: 100%; /* Allow it to take full width for centering */
+  padding: 0.5rem 0;
+  margin-bottom: 0.75rem;
 }
 
 .todo-title {
-  font-size: 1.25rem; /* Slightly smaller than main status */
+  font-size: 1.25rem;
   font-weight: 600;
-  color: #cccccc; /* Lighter grey color */
-  margin-bottom: 0.75rem; /* Space below the title */
+  color: #cccccc;
+  /* margin-bottom: 0.75rem; */ /* Reduced space below the title */
+  margin-bottom: 0.4rem;
   text-align: center;
 }
 
@@ -202,9 +211,10 @@ code {
 /* === End Day Button Styles === */
 
 .end-day-container {
-  margin-top: 1.5rem; /* Adjusted top margin */
+  margin-top: 1rem; /* Reduced top margin */
   text-align: center;
-  padding-bottom: 1rem; /* Add padding at the very bottom */
+  padding-bottom: 0.5rem; /* Reduced bottom padding */
+  margin-bottom: 0.5rem; /* Add a little space at the very end */
 }
 
 .end-day-button {
@@ -233,10 +243,169 @@ code {
 
 .animation-placeholder {
   /* Add some space below the GIF/status area */
-  margin-bottom: 1.5rem; 
+  margin-bottom: 1.5rem;
+  margin-top: 1rem; /* Add space ABOVE the GIF/status area */
+  width: 100%; /* Ensure it centers correctly */
+  text-align: center; /* Center the image */
+}
+
+.status-animation {
+  /* Styles for the GIF itself, adjust if needed */
+  max-width: 150px; /* Example size limit */
+  height: auto;
 }
 
 .status-text-container {
    /* Add space below the FOCUSED/NOT FOCUSED text */
   margin-bottom: 1.5rem; 
+}
+
+/* === Ask Question Section Styles === */
+
+.ask-section {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  width: 90%; /* Make it slightly narrower than the container */
+  max-width: 280px; /* Ensure it doesn't get too wide */
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Separator line */
+}
+
+.ask-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #cccccc;
+  margin-bottom: 0.75rem;
+  cursor: pointer; /* Indicate clickable */
+  transition: color 0.2s ease-in-out;
+}
+
+.ask-title:hover {
+  color: #ffffff; /* Slight highlight on hover */
+}
+
+textarea.question-input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.75rem;
+  border-radius: 4px;
+  border: 1px solid #555;
+  background-color: #333;
+  color: #eee;
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: vertical; /* Allow vertical resize */
+  min-height: 60px;
+}
+
+textarea.question-input:focus {
+  outline: none;
+  border-color: #777;
+  background-color: #444;
+}
+
+textarea.question-input::placeholder {
+  color: #888;
+}
+
+textarea.question-input:disabled {
+  background-color: #444;
+  cursor: not-allowed;
+}
+
+button.ask-button {
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  border: 1px solid var(--ev-button-alt-border);
+  color: var(--ev-button-alt-text);
+  background-color: var(--ev-button-alt-bg);
+  text-align: center;
+  font-weight: 600;
+  white-space: nowrap;
+  border-radius: 20px;
+  padding: 0.4rem 1.2rem; /* Slightly smaller padding */
+  line-height: normal;
+  font-size: 0.9rem; /* Slightly smaller font */
+  transition: all 0.2s ease-in-out;
+}
+
+button.ask-button:hover:not(:disabled) {
+  border-color: var(--ev-button-alt-hover-border);
+  color: var(--ev-button-alt-hover-text);
+  background-color: var(--ev-button-alt-hover-bg);
+  transform: scale(1.05);
+}
+
+button.ask-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.answer-display {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  color: #ccc;
+  font-size: 0.9rem;
+  text-align: left;
+  white-space: pre-wrap; /* Preserve line breaks from AI */
+}
+
+.answer-display p {
+  margin: 0;
+}
+
+/* Apply scrolling and height limits to the main app container */
+.app-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  padding-top: 42px; /* Add padding-top = title-bar height + desired space */
+  box-sizing: border-box;
+}
+
+/* Hide scrollbar for WebKit browsers (Chrome, Edge, Safari, Electron) */
+.app-container::-webkit-scrollbar {
+    display: none; /* Make scrollbar invisible */
+}
+
+/* Optional: For Firefox */
+/* 
+.app-container {
+  scrollbar-width: none; 
+}
+*/
+
+/* === Title Bar Styles === */
+.title-bar {
+  width: 100%;
+  height: 32px; /* Standard title bar height */
+  background-color: rgba(40, 40, 40, 0.8); /* Dark semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center title text */
+  position: fixed; /* Keep it at the top */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Ensure it's above other content */
+  -webkit-app-region: drag; /* Make the whole bar draggable */
+  -webkit-user-select: none; /* Prevent text selection */
+  padding: 0 10px; /* Padding for text */
+  box-sizing: border-box;
+}
+
+.title-text {
+  color: #cccccc; 
+  font-weight: bold;
+  font-size: 0.9rem;
+  /* Individual elements inside can be made non-draggable if needed */
+  /* -webkit-app-region: no-drag; */ 
 }

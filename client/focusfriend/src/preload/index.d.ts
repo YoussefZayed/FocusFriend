@@ -6,6 +6,7 @@ declare global {
     api: unknown
     customAPI: {
       closeApp: () => void
+      resizeWindow: (height: number) => void
     }
   }
 }

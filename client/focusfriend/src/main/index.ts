@@ -3,19 +3,23 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
+// Define window dimensions
+const WINDOW_WIDTH = 350
+const COLLAPSED_HEIGHT = 550 // Increased collapsed height
+const EXPANDED_HEIGHT = 720   // Increased expanded height
+
 function createWindow(): void {
   // Create the browser window.
   const primaryDisplay = screen.getPrimaryDisplay()
   const { width: screenWidth } = primaryDisplay.workAreaSize
 
-  const windowWidth = 300 // Wider rectangle
-  const windowHeight = 500 // Increased height
-  const xPos = screenWidth - windowWidth - 20 // Position from right edge (with some padding)
+  // Use constants for dimensions
+  const xPos = screenWidth - WINDOW_WIDTH - 20 // Position from right edge (with some padding)
   const yPos = 20 // Position from top edge (with some padding)
 
   const mainWindow = new BrowserWindow({
-    width: windowWidth,
-    height: windowHeight,
+    width: WINDOW_WIDTH,
+    height: COLLAPSED_HEIGHT, // Start collapsed
     x: xPos,
     y: yPos,
     show: false,
@@ -61,6 +65,37 @@ function createWindow(): void {
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
+
+  // IPC handler for closing the app
+  ipcMain.on('close-app', () => {
+    app.quit()
+  })
+
+  // IPC handler for resizing the window
+  ipcMain.on('resize-window', (event, height) => {
+    const win = BrowserWindow.fromWebContents(event.sender)
+    if (win) {
+      const currentBounds = win.getBounds();
+      // Animate the resize vertically
+      win.setBounds({ 
+        width: WINDOW_WIDTH, // Keep width constant 
+        height: Math.round(height), // Ensure integer height
+        x: currentBounds.x, 
+        y: currentBounds.y 
+      }, true); 
+    }
+  })
+
+  // Add handlers for window controls
+  ipcMain.on('minimize', () => {
+    const win = BrowserWindow.getFocusedWindow()
+    if (win) win.minimize()
+  })
+
+  ipcMain.on('close', () => {
+    const win = BrowserWindow.getFocusedWindow()
+    if (win) win.close()
+  })
 }
 
 // This method will be called when Electron has finished
@@ -83,6 +118,21 @@ app.whenReady().then(() => {
   // IPC handler for closing the app
   ipcMain.on('close-app', () => {
     app.quit()
+  })
+
+  // IPC handler for resizing the window
+  ipcMain.on('resize-window', (event, height) => {
+    const win = BrowserWindow.fromWebContents(event.sender)
+    if (win) {
+      const currentBounds = win.getBounds();
+      // Animate the resize vertically
+      win.setBounds({ 
+        width: WINDOW_WIDTH, // Keep width constant 
+        height: Math.round(height), // Ensure integer height
+        x: currentBounds.x, 
+        y: currentBounds.y 
+      }, true); 
+    }
   })
 
   // Add handlers for window controls

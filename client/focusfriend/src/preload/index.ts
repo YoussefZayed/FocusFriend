@@ -6,7 +6,8 @@ const api = {}
 
 // Custom API specific to this app
 const customAPI = {
-  closeApp: (): void => ipcRenderer.send('close-app')
+  closeApp: (): void => ipcRenderer.send('close-app'),
+  resizeWindow: (height: number): void => ipcRenderer.send('resize-window', height)
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

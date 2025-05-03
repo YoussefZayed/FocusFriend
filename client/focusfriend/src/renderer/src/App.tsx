@@ -23,8 +23,16 @@ const fetchFocusStatus = async (): Promise<{ focused: boolean }> => {
   }
 }
 
+// Define window heights (should match main process)
+const COLLAPSED_HEIGHT = 550
+const EXPANDED_HEIGHT = 720
+
 function App(): React.JSX.Element {
   const [focusState, setFocusState] = useState<'focused' | 'unfocused'>('focused')
+  const [question, setQuestion] = useState<string>('')
+  const [answer, setAnswer] = useState<string>('')
+  const [isAsking, setIsAsking] = useState<boolean>(false)
+  const [isAskSectionExpanded, setIsAskSectionExpanded] = useState<boolean>(false) // State for expansion
 
   useEffect(() => {
     // Function to check status and update state
@@ -47,6 +55,48 @@ function App(): React.JSX.Element {
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId)
   }, [])
+
+  // useEffect for resizing window based on ask section expansion
+  useEffect(() => {
+    const targetHeight = isAskSectionExpanded ? EXPANDED_HEIGHT : COLLAPSED_HEIGHT;
+    window.customAPI.resizeWindow(targetHeight);
+  }, [isAskSectionExpanded]);
+
+  // Function to handle asking a question
+  const handleAskQuestion = async () => {
+    if (!question.trim()) return // Don't ask if empty
+    setIsAsking(true)
+    setAnswer('Thinking...') // Provide immediate feedback
+    try {
+      const response = await fetch('http://127.0.0.1:5000/ask', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ question: question }),
+      });
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ answer: `HTTP error! status: ${response.status}` }));
+        throw new Error(errorData.answer || `HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      setAnswer(data.answer || 'No answer received.');
+    } catch (error) {
+      console.error("Could not fetch answer:", error);
+      setAnswer(`Error: ${error instanceof Error ? error.message : 'Failed to get answer.'}`);
+    }
+    setIsAsking(false)
+    // setQuestion(''); // Optionally clear question input after asking
+  }
+
+  // Function to toggle the ask section
+  const toggleAskSection = () => {
+    setIsAskSectionExpanded(!isAskSectionExpanded)
+    // Optionally clear answer when collapsing
+    if (isAskSectionExpanded) {
+        setAnswer('');
+    }
+  }
 
   // Remove unused ipcHandle if not needed
   // const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
@@ -83,6 +133,37 @@ function App(): React.JSX.Element {
           <li className="todo-item">vibe code</li>
           <li className="todo-item">win hackathon</li>
         </ul>
+      </div>
+
+      {/* Ask Question Section - Now Collapsible */}
+      <div className="ask-section">
+        <h2 className="ask-title" onClick={toggleAskSection}>
+          Ask About Your Focus {isAskSectionExpanded ? '▲' : '▼'} {/* Add indicator */}
+        </h2>
+        {isAskSectionExpanded && ( // Conditionally render content
+          <>
+            <textarea
+              className="question-input"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              placeholder="e.g., What was I working on yesterday afternoon?"
+              rows={3}
+              disabled={isAsking}
+            />
+            <button
+              className="ask-button"
+              onClick={handleAskQuestion}
+              disabled={isAsking || !question.trim()}
+            >
+              {isAsking ? 'Asking...' : 'Ask AI'}
+            </button>
+            {answer && (
+              <div className="answer-display">
+                <p>{answer}</p>
+              </div>
+            )}
+          </>
+        )}
       </div>
 
       {/* End Day Button */}
