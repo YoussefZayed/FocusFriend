@@ -28,11 +28,11 @@ if not (PINECONE_API_KEY and PINECONE_ENV):
 
 pc = Pinecone(api_key=PINECONE_API_KEY)
 
-# Create index if needed (1536 dims for ada-002 embeddings)
+# Create index if needed (1024 dims for ada-002 embeddings)
 if INDEX_NAME not in pc.list_indexes().names():
     pc.create_index(
         name=INDEX_NAME,
-        dimension=1536,
+        dimension=1024,
         metric="cosine"
     )
 
@@ -80,7 +80,7 @@ def store_in_pinecone(result: dict, id: str):
     text = f"{activities}. State: {state}"
 
     # 1) Create embedding
-    emb_resp = openai.Embeddings.create(
+    emb_resp = openai.embeddings.create(
         model="text-embedding-ada-002",
         input=text
     )
