@@ -19,5 +19,68 @@
       "activities": "The person is seated at a desk, potentially working on programming or coding tasks."
     },
     "state": "distracted"
+  },
+  {
+    "timestamp": "2025-05-03T20:05:39.929099+00:00",
+    "analysis": {
+      "activities": "The person is working on programming tasks at a desk."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:05:51.471518+00:00",
+    "analysis": {
+      "activities": "The person is seated at a workstation, possibly working on coding tasks and managing files in a development environment."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:06:03.364225+00:00",
+    "analysis": {
+      "activities": "The person is working on a programming task at their desk."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:06:15.651170+00:00",
+    "analysis": {
+      "activities": "The person is working on programming tasks at a computer workstation."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:06:29.078684+00:00",
+    "analysis": {
+      "activities": "The person is working on coding tasks at their desk, possibly programming or debugging."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:06:39.724958+00:00",
+    "analysis": {
+      "activities": "The person is working at a computer, possibly involved in programming or coding tasks."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:06:51.311985+00:00",
+    "analysis": {
+      "activities": "The person is sitting at a computer desk and working on programming tasks."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:07:03.883206+00:00",
+    "analysis": {
+      "activities": "The person is working on a computer, possibly involved in programming or coding tasks."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:07:16.581404+00:00",
+    "analysis": {
+      "activities": "The person is working at a computer, possibly involved in programming or coding tasks."
+    },
+    "state": "focused"
   }
 ]
