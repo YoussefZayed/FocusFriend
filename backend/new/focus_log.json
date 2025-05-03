@@ -1,1 +1,128 @@
-[]
+[
+  {
+    "timestamp": "2025-05-03T20:40:19.646556+00:00",
+    "analysis": {
+      "activities": "The user is looking at their computer screen, which displays a coding environment with multiple open tabs and a terminal window showing code execution logs. They are engaged in programming or debugging a Python script related to image processing and JSON data handling, focusing on analyzing images and generating a JSON object with 'activities' and 'state'."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:40:28.082115+00:00",
+    "analysis": {
+      "activities": "The user is primarily looking at their computer screen, which displays a coding environment with code related to analyzing images and returning a JSON object. They are actively engaged in programming, focusing on the code that processes images to analyze and generate a JSON response containing 'activities' and 'state'. The user also appears to be holding or interacting with their phone, but their attention is mainly on the screen with the code, indicating they are working or studying related to programming or AI development."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:40:47.443060+00:00",
+    "analysis": {
+      "activities": "The user is working on a coding project, likely involving AI or machine learning, as evidenced by the open code files and terminal output showing code related to image analysis and API calls. They are actively reviewing and editing code, with specific focus on functions that analyze images and return a JSON object. The user appears to be working in a development environment, with multiple code files, terminal logs, and an active coding session. Additionally, there is a focus on JSON formatting and debugging, indicating a task centered on programming and understanding code flow."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:41:00.780487+00:00",
+    "analysis": {
+      "activities": "The user is primarily focused on their computer screen, working on a coding or programming task related to AI or natural language processing. They are viewing a JSON structure within a code editor that includes detailed descriptions of images and user activities, suggesting they are analyzing data or developing software. The screen displays code, debug logs, and an interface for editing or reviewing the code and data related to a project involving image analysis, user activity, and focus detection."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:41:09.848508+00:00",
+    "analysis": {
+      "activities": "The user is sitting in front of their computer, actively engaged in a coding or programming task. They are looking at their computer screen, which displays a coding environment with multiple open files related to a focus tracking application, including JSON data, code, and styling files. The user appears to be focused on analyzing or editing code, likely working on their project involving user activity logging and focus detection."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:41:19.346556+00:00",
+    "analysis": {
+      "activities": "The user is looking intently at their computer screen, which displays a coding environment with multiple open tabs related to programming and project management. The screen shows code files, a focus application, and a to-do list, indicating the user is engaged in work or study activities related to software development or programming. The user appears focused and actively working on a coding project, likely involving AI or machine learning."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:41:27.677817+00:00",
+    "analysis": {
+      "activities": "The user is looking at their computer screen, which displays multiple open tabs and windows related to coding and development work. They appear to be working on a coding project, reviewing JSON data about user activities and their focus state, as well as examining CSS and configuration files. The user is engaged in analyzing or debugging code, with a focus on user activity states and interface adjustments for a focus application."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:41:36.784897+00:00",
+    "analysis": {
+      "activities": "The user is focused on their computer screen, working on a coding or programming task related to AI or machine learning, as evidenced by the JSON log file and code editor visible on the screen. They are reading or editing code, adjusting UI elements, and reviewing technical documentation, possibly for a focus or productivity app. They seem to be engaged with customizing or debugging features within the code editor, actively working on the code and configuration files."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:41:46.026811+00:00",
+    "analysis": {
+      "activities": "The user is sitting in front of the camera, looking at the screen where they appear to be browsing or studying online. The screen displays the OpenAI platform with various models related to GPT and image generation, indicating that the user may be researching or working on AI or machine learning projects. They are focused on the content on the screen, possibly reading or selecting models or tools relevant to their work."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:41:56.080388+00:00",
+    "analysis": {
+      "activities": "The user is looking at their computer screen, which displays a Reddit webpage featuring memes, discussions, and various subreddit communities. The webpage shows memes related to Australia and Canada, with a prominent meme about voting out losers, and some discussion comments. The user might be engaging with social or entertainment content, possibly browsing casually or staying updated on topics of interest."
+    },
+    "state": "distracted"
+  },
+  {
+    "timestamp": "2025-05-03T20:42:11.177311+00:00",
+    "analysis": {
+      "activities": "The user is looking at their computer screen, which displays the Reddit website. The content on the screen includes a meme comparing Australia and Canada with the caption 'VOTING OUT LOSERS,' and some other Reddit posts. The user appears to be engaged with online content, possibly browsing or reading discussions related to current events or social topics. They are also in front of a video camera, indicating they might be in a video call or recording a video, but the main activity involves viewing and possibly interacting with Reddit."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:42:48.986186+00:00",
+    "analysis": {
+      "activities": "In the first image, the user is looking attentively at the computer screen, indicating engagement with the task at hand. In the second image, the screen displays a code editor with lines of code, as well as a to-do list that includes relevant tasks such as 'vibe code' and 'win hackathon.' This suggests the user is actively working on coding or related projects. The overall context indicates the user is focused on their work, possibly debugging or enhancing a project related to their tasks."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:42:59.307683+00:00",
+    "analysis": {
+      "activities": "In the first image, the user appears to be attentive and focused as he is looking directly at the camera, suggesting he is engaged in a task. The second image shows the user working on a coding task, specifically within a code editor, which displays various programming elements, including coding syntax and a terminal for commands. Additionally, there is a to-do list visible on the screen, suggesting the user is organizing tasks. Overall, the user is actively engaged in work-related activities, focusing on coding and task management."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:43:10.662013+00:00",
+    "analysis": {
+      "activities": "In the first image, the user is looking attentively at their computer screen, indicating engagement with their work. The second image shows a coding environment where the user is working on programming tasks, specifically editing code in a code editor. The user appears to be focused on enhancing the layout and design-related aspects of their application, suggesting they are actively coding and problem solving."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:43:20.965648+00:00",
+    "analysis": {
+      "activities": "In the first image, the user appears to be sitting in an office or home workspace looking directly at the camera, which indicates engagement with the computer. The second image shows the user actively working on a coding project, specifically within a code editor environment. They are reviewing JSON files and making code adjustments related to UI spacing, while also using a terminal for log management. The visible content suggests focused work on programming tasks, including debugging and adjusting code layout."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:43:32.110621+00:00",
+    "analysis": {
+      "activities": "In the first image, the user is seated in front of a computer, displaying a neutral expression and looking directly at the camera, suggesting engagement with their immediate environment. In the second image, the user is focused on their computer screen, which shows a code editor (likely Visual Studio Code) with a programming-related task. The visible code and comments indicate that the user is working on adjustments to the layout and styling of a web app, along with a to-do list that includes relevant tasks such as 'vibe code' and 'win hackathon.' The screen displays productive content related to development."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:43:43.049547+00:00",
+    "analysis": {
+      "activities": "In the first image, the user is looking attentively at the computer screen, indicating engagement with the task at hand. In the second image, the user is working in a code editor environment, likely focused on coding or debugging tasks, as evidenced by the visible code and comments. The display includes a to-do list, indicating a structured approach to their tasks. The user appears to be engaged in actively developing or maintaining code, demonstrating a productive work state."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:43:54.166562+00:00",
+    "analysis": {
+      "activities": "In the first image, the user appears to be focused and looking directly at a screen, likely engaging with work or study-related content. However, the second image clearly shows that the user is browsing Reddit, which includes content that is not related to work or study. The Reddit page displays posts about a Formula 1 race and unrelated discussions, indicating a personal browsing activity."
+    },
+    "state": "distracted"
+  }
+]
