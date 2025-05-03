@@ -94,23 +94,34 @@ def assess_focus(client: OpenAI, analysis: dict) -> dict:
         raise ValueError(f"Could not parse focus state JSON: {e}\nRaw was:\n{raw}")
 
 
-def get_overall_analysis(img1_path: str, img2_path: str) -> dict:
+def analyze_and_assess(img1_path: str, img2_path: str) -> dict:
     """
-    Initialize OpenAI client, run the two-image overall analysis,
-    and return the resulting JSON dict.
-    """
-    client = init_openai()
-    return analyze_overall(client, img1_path, img2_path)
-
-
-def main(img1_path: str, img2_path: str) -> dict:
-    """
-    Initialize OpenAI client, run the two-image overall analysis,
-    save to overall_result.json, and return the JSON dict.
+    Given two image paths, analyze overall activities and assess focus.
+    Returns a dict:
+      {
+        "analysis": { "activities": "…" },
+        "state":   "focused" | "distracted"
+      }
     """
     client = init_openai()
     overall = analyze_overall(client, img1_path, img2_path)
+    focus   = assess_focus(client, overall)
+    return {
+        "analysis": overall,
+        "state":    focus.get("state")
+    }
 
+
+def main():
+    parser = argparse.ArgumentParser(description="Two-step image analysis for focus.")
+    parser.add_argument("img1", help="Path to first image (e.g. screen)")
+    parser.add_argument("img2", help="Path to second image (e.g. desk)")
+    args = parser.parse_args()
+
+    client = init_openai()
+
+    # Step 1: overall activity analysis
+    overall = analyze_overall(client, args.img1, args.img2)
 
     # Step 2: focus/distracted decision
     focus = assess_focus(client, overall)

@@ -4,6 +4,7 @@ import os
 from datetime import datetime
 import pyautogui
 import cv2
+from ConnectAI import analyze_and_assess
 
 # Directory paths
 screenshot_dir = "device_screenshots"
@@ -45,8 +46,9 @@ def capture_camera_image():
 
 def transcribe(screenshot_path, camera_image_path):
     # Placeholder for the transcribe function
+    result = analyze_and_assess(camera_image_path, screenshot_path)
     print(f"Transcribing {screenshot_path} and {camera_image_path}")
-    return "Transcription result"
+    return result
 
 # Synchronize captures and transcription every 5 seconds
 try:
