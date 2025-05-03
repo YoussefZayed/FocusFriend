@@ -9,7 +9,7 @@ function createWindow(): void {
   const { width: screenWidth } = primaryDisplay.workAreaSize
 
   const windowWidth = 300 // Wider rectangle
-  const windowHeight = 400 // Less height for a rectangle
+  const windowHeight = 500 // Increased height
   const xPos = screenWidth - windowWidth - 20 // Position from right edge (with some padding)
   const yPos = 20 // Position from top edge (with some padding)
 
@@ -79,6 +79,11 @@ app.whenReady().then(() => {
 
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
+
+  // IPC handler for closing the app
+  ipcMain.on('close-app', () => {
+    app.quit()
+  })
 
   // Add handlers for window controls
   ipcMain.on('minimize', () => {
