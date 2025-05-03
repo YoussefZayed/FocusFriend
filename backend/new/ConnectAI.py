@@ -5,9 +5,14 @@ import argparse
 import base64
 from dotenv import load_dotenv
 from openai import OpenAI
+import datetime  # Added import
 
 # Load .env
 load_dotenv()
+
+# Determine the directory of the current script
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+LOG_FILE = os.path.join(SCRIPT_DIR, "focus_log.json") # Define log file name relative to script dir
 
 def init_openai():
     api_key = os.getenv("OPENAI_API_KEY")
@@ -126,17 +131,51 @@ def main():
     # Step 2: focus/distracted decision
     focus = assess_focus(client, overall)
 
-    # Combine and save
+    # Combine result with timestamp
+    # timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat() # Timestamping now handled by caller
     result = {
+        # "timestamp": timestamp,
         "analysis": overall,
         "state": focus.get("state")
     }
-    out_file = "final_result.json"
-    with open(out_file, "w") as f:
-        json.dump(result, f, indent=2)
 
-    print(f"Saved final result to {out_file}")
-    #print(json.dumps(result, indent=2))
+    # File writing logic moved to sync_capture_transcribe.py
+    # The main function here can just print the result for testing
+    print("Analysis result (not saved to log by this script):")
+    print(json.dumps(result, indent=2))
+
+    # # Read existing log data, append new result, and write back
+    # log_data = []
+    # if os.path.exists(LOG_FILE):
+    #     try:
+    #         with open(LOG_FILE, "r") as f:
+    #             log_data = json.load(f)
+    #         if not isinstance(log_data, list): # Ensure it's a list
+    #             print(f"Warning: {LOG_FILE} does not contain a list. Starting new log.")
+    #             log_data = []
+    #     except json.JSONDecodeError:
+    #         print(f"Warning: Could not decode JSON from {LOG_FILE}. Starting new log.")
+    #         log_data = []
+    #     except Exception as e:
+    #          print(f"Warning: Could not read {LOG_FILE}: {e}. Starting new log.")
+    #          log_data = []
+    #
+    #
+    # log_data.append(result)
+    #
+    # # Explicitly log before attempting to write
+    # print(f"Attempting to write to log file: {LOG_FILE}")
+    # try:
+    #     with open(LOG_FILE, "w") as f:
+    #         json.dump(log_data, f, indent=2)
+    #     # Explicitly log after successful write
+    #     print(f"Successfully wrote {len(log_data)} entries to {LOG_FILE}")
+    # except Exception as e:
+    #     # Log any error during file writing
+    #     print(f"Error writing to log file {LOG_FILE}: {e}")
+    #
+    # #print(f"Appended result to {LOG_FILE}") # This is now redundant with the success message above
+    # #print(json.dumps(result, indent=2)) # Keep this commented out or remove
 
 if __name__ == "__main__":
     main()
