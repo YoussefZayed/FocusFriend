@@ -1,0 +1,51 @@
+/* Reset default styles */
+body,
+html,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Prevent scrollbars */
+}
+
+/* Make background transparent */
+body,
+html {
+  background-color: transparent !important; /* Ensure transparency */
+}
+
+#root {
+  /* Optional: Add styles for the root container if needed */
+}
+
+.app-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent; /* Ensure app container is transparent */
+}
+
+.animation-placeholder {
+  text-align: center;
+  color: #fff; /* Example text color - change as needed */
+  /* Add styles for your animation placeholders */
+  /* For testing, add a semi-transparent background */
+  /* background-color: rgba(255, 255, 255, 0.1); */
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.animation-placeholder.idle h2 {
+  color: lightgreen;
+}
+
+.animation-placeholder.sad h2 {
+  color: lightcoral;
+}
+
+
+/* Keep existing styles below or integrate them */
+/* ... existing code ... */ 
