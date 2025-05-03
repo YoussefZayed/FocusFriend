@@ -4,100 +4,100 @@ import os
 from datetime import datetime, timezone
 import pyautogui
 import cv2
-from ConnectAI import analyze_and_assess
 import json
 
-# Directory paths
-screenshot_dir = "../device_screenshots"
-camera_capture_dir = "../camera_captures"
-LOG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "focus_log.json")
+from dotenv import load_dotenv
+import openai
+import pinecone
 
-# Ensure directories exist
+from ConnectAI import analyze_and_assess
+
+# load credentials
+load_dotenv()
+openai.api_key          = os.getenv("OPENAI_API_KEY")
+pinecone_api_key        = os.getenv("PINECONE_API_KEY")
+pinecone_environment    = os.getenv("PINECONE_ENVIRONMENT")
+pinecone_index_name     = os.getenv("PINECONE_INDEX_NAME")
+
+# initialize Pinecone client once
+pinecone.init(api_key=pinecone_api_key, environment=pinecone_environment)
+pinecone_index = pinecone.Index(pinecone_index_name)
+
+# Directory paths
+screenshot_dir     = "../device_screenshots"
+camera_capture_dir = "../camera_captures"
+LOG_FILE           = os.path.join(os.path.dirname(os.path.abspath(__file__)), "focus_log.json")
+
 os.makedirs(os.path.join(os.path.dirname(__file__), screenshot_dir), exist_ok=True)
 os.makedirs(os.path.join(os.path.dirname(__file__), camera_capture_dir), exist_ok=True)
 
-# Function to capture a screenshot
-
 def capture_screenshot():
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    screenshot_filename = os.path.join(os.path.dirname(__file__), screenshot_dir, f"device_screenshot_{timestamp}.png")
-    screenshot = pyautogui.screenshot()
-    screenshot.save(screenshot_filename)
-    print(f"Screenshot saved as {screenshot_filename}")
-    return screenshot_filename
-
-# Function to capture an image from the camera
+    filename  = os.path.join(os.path.dirname(__file__),
+                             screenshot_dir,
+                             f"device_screenshot_{timestamp}.png")
+    pyautogui.screenshot().save(filename)
+    return filename
 
 def capture_camera_image():
     cap = cv2.VideoCapture(0)
     if not cap.isOpened():
-        print("Cannot open the main camera.")
         return None
     ret, frame = cap.read()
     cap.release()
     if not ret:
-        print("Failed to capture image")
         return None
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    image_filename = os.path.join(os.path.dirname(__file__), camera_capture_dir, f"camera_capture_{timestamp}.png")
-    cv2.imwrite(image_filename, frame)
-    print(f"Camera capture saved as {image_filename}")
-    return image_filename
-
-# Transcribe function
+    filename  = os.path.join(os.path.dirname(__file__),
+                             camera_capture_dir,
+                             f"camera_capture_{timestamp}.png")
+    cv2.imwrite(filename, frame)
+    return filename
 
 def transcribe(screenshot_path, camera_image_path):
-    # Placeholder for the transcribe function
-    result = analyze_and_assess(camera_image_path, screenshot_path)
-    print(f"Transcribing {screenshot_path} and {camera_image_path}")
-    return result
+    return analyze_and_assess(camera_image_path, screenshot_path)
 
-# Synchronize captures and transcription every 5 seconds
 try:
     while True:
-        screenshot_path = capture_screenshot()
-        camera_image_path = capture_camera_image()
-        if screenshot_path and camera_image_path:
-            result = transcribe(screenshot_path, camera_image_path)
-            print(f"Transcription result: {result}")
+        ss_path = capture_screenshot()
+        cam_path = capture_camera_image()
+        if not ss_path or not cam_path:
+            time.sleep(5)
+            continue
 
-            # Add timestamp to the result
-            timestamp = datetime.now(timezone.utc).isoformat()
-            log_entry = {
-                "timestamp": timestamp,
-                "analysis": result.get("analysis", {}),
-                "state": result.get("state")
-            }
+        result = transcribe(ss_path, cam_path)
+        # add to local JSON log…
+        timestamp_utc = datetime.now(timezone.utc).isoformat()
+        log_entry = {
+            "id": timestamp_utc,
+            "analysis": result.get("analysis", {}),
+            "state": result.get("state")
+        }
+        # (code to append log_entry into focus_log.json…)
 
-            # Read existing log data, append new result, and write back
-            log_data = []
-            if os.path.exists(LOG_FILE):
-                try:
-                    with open(LOG_FILE, "r") as f:
-                        content = f.read()
-                        if content: # Check if file is not empty
-                           log_data = json.loads(content)
-                    if not isinstance(log_data, list): # Ensure it's a list
-                        print(f"Warning: {LOG_FILE} does not contain a list. Starting new log.")
-                        log_data = []
-                except json.JSONDecodeError:
-                    print(f"Warning: Could not decode JSON from {LOG_FILE}. Starting new log.")
-                    log_data = []
-                except Exception as e:
-                     print(f"Warning: Could not read {LOG_FILE}: {e}. Starting new log.")
-                     log_data = []
+        # ——— NEW: turn `result` into an embedding + upsert into Pinecone ———
+        payload_text = json.dumps(result)
+        emb_resp = openai.Embedding.create(
+            model="text-embedding-ada-002",
+            input=payload_text
+        )
+        vector = emb_resp["data"][0]["embedding"]
 
-            log_data.append(log_entry)
+        # use the timestamp as unique ID (or any other scheme)
+        pinecone_index.upsert([
+            (
+                timestamp_utc,   # unique ID
+                vector,          # your embedding
+                {
+                  "screenshot": os.path.basename(ss_path),
+                  "camera_img":  os.path.basename(cam_path),
+                  **result        # you can store the full result as metadata if you like
+                }
+            )
+        ])
 
-            # Write updated log data back to the file
-            print(f"Attempting to write to log file: {LOG_FILE}")
-            try:
-                with open(LOG_FILE, "w") as f:
-                    json.dump(log_data, f, indent=2)
-                print(f"Successfully wrote {len(log_data)} entries to {LOG_FILE}")
-            except Exception as e:
-                print(f"Error writing to log file {LOG_FILE}: {e}")
-
+        print(f"Upserted embedding for {timestamp_utc} into Pinecone index '{pinecone_index_name}'")
         time.sleep(5)
+
 except KeyboardInterrupt:
-    print("Process stopped.") 
+    print("Process stopped.")
