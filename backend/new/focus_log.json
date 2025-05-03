@@ -82,5 +82,278 @@
       "activities": "The person is working at a computer, possibly involved in programming or coding tasks."
     },
     "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:11:48.297466+00:00",
+    "analysis": {
+      "activities": "The user is seated in an office environment, wearing glasses and a red sweater. In front of them is a computer screen displaying a code editor, likely Visual Studio Code, given the UI and file structure visible. The user is working on a Python project related to 'FocusFriend'. The files displayed include 'ConnectAI.py' and other relevant files in the project directory. The terminal shows commands related to running a Python script with Flask, confirming a development environment. The screen also shows a right-side panel with notes or instructions about enhancing JSON mode and focus criteria. An application called 'Focus Friend' is active, indicating the user is in a focused state."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:12:06.005365+00:00",
+    "analysis": {
+      "activities": "In the first image, the person is sitting in an office environment, wearing a red sweater and glasses, possibly focused on the task at hand. In the second image, the computer screen displays a coding environment in Visual Studio Code, featuring a Python project related to 'FocusFriend'. The left sidebar shows a file structure with files like 'ConnectAI.py', 'focus_log.json', etc. The main area shows code related to JSON handling and backend logic. There is also a terminal window with active processes indicating a Flask server running. On the right, a panel labeled 'Focus Friend' suggests that the person is using an app or tool related to maintaining focus. Overall, the person is engaged in programming and code development tasks."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:12:21.569160+00:00",
+    "analysis": {
+      "activities": "The user is positioned in front of a computer screen in an office-like environment. They appear to be engaged with content on a Reddit page, visible on the screen, specifically browsing popular posts. The current post being displayed is from the subreddit r/AmIOverreacting, featuring a screenshot of a text conversation discussing relationship concerns. The user is likely browsing through the posts and comments as a form of leisure or interest in social discussions."
+    },
+    "state": "distracted"
+  },
+  {
+    "timestamp": "2025-05-03T20:12:37.765504+00:00",
+    "analysis": {
+      "activities": "The user appears to be sitting in an office environment. In the second image, they are looking at a computer screen displaying the Reddit homepage with content focused on popular posts. The screen shows a meme about a YouTube channel's subscription ranking and additional posts about gaming news involving a congratulatory message from the French President. The user is likely using Reddit to browse trending topics and entertainment content. A 'Focus Friend' notification is visible, indicating a tool that monitors focus or productivity status, currently set to 'Not Focused'."
+    },
+    "state": "distracted"
+  },
+  {
+    "timestamp": "2025-05-03T20:12:52.556587+00:00",
+    "analysis": {
+      "activities": "The user is seated in an office-like environment, wearing a red sweater and glasses, possibly focused on the task at hand. In the second image, they are looking at a computer screen displaying a code editor, likely Visual Studio Code. Various files and folders related to a project named 'FocusFriend' are visible, with open tabs showing Python files. The terminal at the bottom shows the app running with Flask. There is a side notification indicating 'NOT FOCUSED,' suggesting a tool is monitoring focus. The user may be engaged in debugging or developing code while also viewing Reddit content, suggesting multitasking between work and browsing topics of interest."
+    },
+    "state": "distracted"
+  },
+  {
+    "timestamp": "2025-05-03T20:13:09.720680+00:00",
+    "analysis": {
+      "activities": "The user is in a coding environment, visible from both images. In the first image, the user appears to be sitting at a desk, wearing a red sweater, and looking directly at the camera. In the second image, their screen displays Visual Studio Code with a project related to 'FocusFriend' open. The file explorer shows various Python files, such as 'ConnectAI.py' and 'focus_log.json'. The terminal at the bottom of the screen shows an active Flask server running. A sidebar on the screen notes the user is 'NOT FOCUSED', indicating the use of an application or tool for focus tracking. The user might be programming, handling server activities, or analyzing content on screen while potentially being distracted, as suggested by the focus tracking tool."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:16:11.099074+00:00",
+    "analysis": {
+      "activities": "The user is sitting at a desk looking directly at the computer screen. The screen displays a coding environment, specifically Visual Studio Code, with a Python script open. The script appears to include functions for JSON analysis and API interactions. To the right of the code editor, there are comments or logs discussing JSON mode and focus criteria. Additionally, a sidebar notes debugging outputs. An overlay shows a 'Focus Friend' notification indicating the user is 'FOCUSED'."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:16:26.743966+00:00",
+    "analysis": {
+      "activities": "The user is sitting at a desk looking directly at the computer screen. The screen displays a coding environment, specifically Visual Studio Code, with a Python script open. The script appears to include functions for JSON analysis and astronaut controls. To the right of the code editor, there are comments or logs discussing JSON mode and focus criteria. Additionally, a sidebar notes debugging outputs. An overlay shows 'Focus Friend' notification indicating the user is 'FOCUSED'."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:16:42.345328+00:00",
+    "analysis": {
+      "activities": "The user is sitting at a desk looking directly at the computer screen. The screen displays a coding environment, specifically Visual Studio Code, with a Python project open. The script appears to include functions for JSON analysis and other comments. To the right of the editor, a sidebar is open, showing notes or logs discussing JSON mode and response criteria. Additionally, a sidebar notice indicating outputs: an overlay shows 'FOCUSED,' indicating that the user is focused."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:16:56.306929+00:00",
+    "analysis": {
+      "activities": "The user is sitting at a desk with two individuals visible in the environment. The screen displays a coding environment, specifically Visual Studio Code, with a Python project open. The script appears to include functions for JSON analysis and other comments. To the right of the screen is a Focus Friend app, indicating the user is focused. Additionally, there is a sidebar with terminal output showing logs of interactions with the system. The user appears engaged in programming and system monitoring activities."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:17:13.476406+00:00",
+    "analysis": {
+      "activities": "The user is sitting at a desk looking directly at a computer screen. The screen displays a coding environment, specifically Visual Studio Code, with files related to a project focused on analyzing activities. The project includes Python scripts and JSON log files. A terminal is open at the bottom, showing system monitoring and output messages. The sidebar shows various project files, and there is an active coding session, with debugging information visible. To the right, there is a chat interface discussing system improvements and focus analysis. A notification on the screen indicates the user is in 'FOCUSED' mode."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:17:35.940506+00:00",
+    "analysis": {
+      "activities": "The user is browsing Reddit on a desktop screen. The visible Reddit page is the popular section, featuring posts like 'Flames Sign Matt Coronato To Extension' and 'Amazon driver donates winnings to a local children\u2019s hospital.' The user is sitting in front of the screen, with two individuals in front of a camera, but their focus appears to be on the screen rather than directly at the camera."
+    },
+    "state": "distracted"
+  },
+  {
+    "timestamp": "2025-05-03T20:20:58.131539+00:00",
+    "analysis": {
+      "activities": "The user is sitting and looking down, not directly at the screen. The screen shows a code editor with multiple files open and detailed code review or editing activity. There's a 'Focus Friend' notification that indicates 'NOT FOCUSED'."
+    },
+    "state": "distracted"
+  },
+  {
+    "timestamp": "2025-05-03T20:21:08.003544+00:00",
+    "analysis": {
+      "activities": "The user is sitting and looking down, not directly at the screen. The screen shows a code editor with multiple files open and detailed code review or editing activity. There's a focus status notification that indicates 'NOT FOCUSED'."
+    },
+    "state": "distracted"
+  },
+  {
+    "timestamp": "2025-05-03T20:21:19.067152+00:00",
+    "analysis": {
+      "activities": "The user is sitting and looking downward, not directly at the screen. The screen shows a code editor with multiple files open and detailed code reviewing or editing activity. There's a 'Focus Friend' notification that indicates 'NOT FOCUSED'."
+    },
+    "state": "distracted"
+  },
+  {
+    "timestamp": "2025-05-03T20:21:28.916864+00:00",
+    "analysis": {
+      "activities": "The user is sitting and looking mostly straight with a neutral expression, not directly at the camera. The screen shows a code editor with multiple files open and detailed code review or editing activity. There's a visible notification from an application called 'FocusFriend' indicating 'NOT FOCUSED'."
+    },
+    "state": "distracted"
+  },
+  {
+    "timestamp": "2025-05-03T20:21:37.681411+00:00",
+    "analysis": {
+      "activities": "The user is sitting and looking directly at the camera with a neutral expression. The screen displays a code editor with multiple files open and detailed code review interactions. There's a panel on the right with a notification stating 'NOT FOCUSED'."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:21:48.500038+00:00",
+    "analysis": {
+      "activities": "The user is sitting and looking mostly straight with a neutral expression, but not directly at the camera. The screen shows a code editor with multiple files open and detailed code review or editing activity. There's a visible notification from an application called 'FocusFriend' indicating 'NOT FOCUSED'."
+    },
+    "state": "distracted"
+  },
+  {
+    "timestamp": "2025-05-03T20:22:03.768604+00:00",
+    "analysis": {
+      "activities": "The user is sitting and looking directly at the camera with a neutral expression. The screen displays a code editor with multiple files open and detailed code review interactions. There is a panel on the right with a notification stating 'NOT FOCUSED'."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:22:14.575261+00:00",
+    "analysis": {
+      "activities": "The user is directly facing the camera, with a neutral expression, and appears to be working. The screen shows a code editor with multiple files open, including a Python script and an error log, suggesting code review or editing activities. There is also a notification from an application labeled 'FocusFriend' indicating 'FOCUSED.'"
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:22:31.468724+00:00",
+    "analysis": {
+      "activities": "The user is not directly looking at the screen. The screen shows a code editor with multiple files open, including a Python script and an error log, suggesting coding or technical analysis. There is also a notification from an application labeled 'FocusFriend' indicating 'FOCUSED.'"
+    },
+    "state": "distracted"
+  },
+  {
+    "timestamp": "2025-05-03T20:22:39.772879+00:00",
+    "analysis": {
+      "activities": "The user is looking at a computer screen displaying a code editor. Multiple files are open, including Python scripts and logs, suggesting testing or debugging a software application. The screen also shows a sidebar with JSON structures and a section labeled 'Focus Friend' indicating the user is focused."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:22:50.745315+00:00",
+    "analysis": {
+      "activities": "The user is moving away from the screen and is not looking directly at it. The screen displays a code editor with Python scripts and a focused notification from an application called 'FocusFriend'."
+    },
+    "state": "distracted"
+  },
+  {
+    "timestamp": "2025-05-03T20:23:00.399746+00:00",
+    "analysis": {
+      "activities": "The user is sitting at a desk looking directly at a computer screen. The screen displays a code editor with multiple files open, including Python script and logs. Additional text editors or documentation is visible, indicating work-related tasks."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:23:09.929759+00:00",
+    "analysis": {
+      "activities": "The user is sitting at a desk looking directly at the computer screen, which displays a code editor with Python scripts and a focused notification from an application called 'FocusFriend'."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:23:19.544880+00:00",
+    "analysis": {
+      "activities": "The user is sitting at a desk with two individuals visible in the environment. The screen displays a coding environment with multiple open files, including Python script and logs."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:23:28.234634+00:00",
+    "analysis": {
+      "activities": "The user is sitting at their desk, engaged in conversation with another person. They are not looking at the computer screen, which displays a code editor with Python scripts and other work-related content."
+    },
+    "state": "distracted"
+  },
+  {
+    "timestamp": "2025-05-03T20:23:36.608410+00:00",
+    "analysis": {
+      "activities": "The user is holding a black object and facing the camera. The screen displays a coding environment with multiple open files, documentation, and a terminal output related to JSON and Python development."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:23:45.272329+00:00",
+    "analysis": {
+      "activities": "The user is sitting at a desk looking directly at the computer screen. The screen displays a coding environment, specifically a code editor with Python scripts and related content. There's a focus enhancement app visible, indicating focused work."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:23:55.979851+00:00",
+    "analysis": {
+      "activities": "The user is holding a black object (likely a phone) and facing the camera. The screen displays a coding environment with multiple open files, documentation, and a terminal output related to JSON and Python development."
+    },
+    "state": "distracted"
+  },
+  {
+    "timestamp": "2025-05-03T20:24:11.038730+00:00",
+    "analysis": {
+      "activities": "The user is sitting at a desk looking directly at the computer screen. The screen displays a code editor with Python scripts and related content. There's a focus application visible, indicating focused work."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:24:20.019503+00:00",
+    "analysis": {
+      "activities": "The user is sitting at a desk and looking directly at the computer screen. The screen displays a coding environment with multiple open files, terminal output, and a text editor with Python code."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:24:31.232279+00:00",
+    "analysis": {
+      "activities": "The user is sitting at a desk and looking directly at the computer screen. The screen displays a code editor with Python scripts and related content. There is a focus application visible, indicating focus status."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:24:40.130146+00:00",
+    "analysis": {
+      "activities": "The user is sitting at a desk and looking directly at the computer screen. The screen displays a coding environment with multiple open files, terminal output, and a text editor with Python code."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:24:48.481586+00:00",
+    "analysis": {
+      "activities": "The user is sitting at a desk and is looking directly at the computer screen. The screen displays a code editor with Python scripts and related content. There is a focus application visible, indicating a focus status."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:24:58.753783+00:00",
+    "analysis": {
+      "activities": "The user is sitting at a desk and looking directly at the computer screen. The screen displays a coding environment with multiple open files, terminal output, and a text editor with Python code."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:25:06.591915+00:00",
+    "analysis": {
+      "activities": "The user is sitting at a desk and is looking directly at the computer screen. The screen displays a code editor with Python scripts and terminal output. There is a focus application widget, indicating the user is focused."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:25:14.829989+00:00",
+    "analysis": {
+      "activities": "The user is sitting at a desk and is looking directly at the computer screen. The screen displays a coding environment with multiple open files, terminal output, and a text editor with Python code."
+    },
+    "state": "focused"
+  },
+  {
+    "timestamp": "2025-05-03T20:25:23.571424+00:00",
+    "analysis": {
+      "activities": "The user is sitting at a desk and is looking directly at the computer screen. The screen displays a code editor with Python scripts and terminal output. There is a focus application widget, indicating that the user is focused."
+    },
+    "state": "focused"
   }
 ]

@@ -98,6 +98,6 @@ try:
             except Exception as e:
                 print(f"Error writing to log file {LOG_FILE}: {e}")
 
-        time.sleep(5)
+        time.sleep(1)
 except KeyboardInterrupt:
     print("Process stopped.") 
